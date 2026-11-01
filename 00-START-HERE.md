@@ -31,44 +31,38 @@ The AI is very good at **doing** and bad at **guessing what you want**. Every fi
 
 ---
 
-## The exam machine
-
-The exam is on the **lab PCs: Ubuntu Linux, Node 18.19.1, firewalled**, the same as the semester test. That matters because:
-- Latest Next.js / Tailwind / better-sqlite3 / Vitest need Node 20+. **Use the pinned versions in `STACK-A-NEXTJS.md`.** They were tested on Node 18.19.1.
-- Nothing you install on your Mac tonight carries over. The lab PC starts clean.
-- The lab PC isn't logged into your GitHub. You need a **Personal Access Token** (tonight, step 1).
-- Shortcuts are **Ctrl**, not Cmd. Paste in the terminal is **Ctrl+Shift+V**.
-
----
-
-## Tonight's checklist (≈ 60 minutes, then SLEEP)
+## Tonight's checklist (≈ 75 minutes, then SLEEP)
 
 Tick these off in order. If one gets stuck for more than 10 minutes, skip it.
 
-**1. GitHub token (5 min)**, the thing that ruins people in the last 5 minutes
-- [ ] Create a Personal Access Token: `COMMITS.md` → "Make sure push works". Save it on your phone.
+**1. Laptop basics (10 min)**
+- [ ] `node -v` in Terminal → must be **22.13 or higher** (or 24.x). If not: `fnm install 22 && fnm default 22`
+- [ ] `python3 --version` → 3.11 or higher (for the backup stack)
+- [ ] `git --version` works
+- [ ] `sqlite3 --version` works (built into macOS)
 
-**2. Optional dress rehearsal on your Mac with Node 18 (20 min)**
-This is the most realistic practice you can do tonight:
-```bash
-fnm install 18.19.1 && fnm use 18.19.1 && node -v     # v18.19.1 in this terminal only
-```
-- [ ] Then follow `STACK-A-NEXTJS.md` → "Exam: setup" exactly, up to `npm run build`. If it builds, the plan works.
-- [ ] Afterwards: delete the folder. `fnm use default` (or open a new terminal) to get your normal Node back.
+**2. GitHub works (10 min)** — this is the thing that ruins people in the last 5 minutes
+- [ ] Make a throwaway repo on github.com, clone it, add a file, `git commit`, `git push`. If push asks for a password and fails, fix it now (see `COMMITS.md` → "Make sure push works").
+- [ ] Delete the throwaway repo afterwards.
 
-**3. Qoder (15 min)**
-- [ ] Do the practice drill at the bottom of `QODER-GUIDE.md` (on your Mac, Cmd instead of Ctrl).
-- [ ] Make sure you know your Qoder login details. You'll sign in on the lab PC.
+**3. Warm your caches (15 min)** — so installs work behind the firewall
+- [ ] Follow **"Tonight: warm-up run"** in `STACK-A-NEXTJS.md`. It creates a project, installs everything once (including the SQLite driver's prebuilt binary) and then you delete the project. The downloads stay cached on your laptop.
+- [ ] Do the same short warm-up in `STACK-B-PYTHON.md`.
+- [ ] (Optional, only if Docker Desktop is already installed) `docker pull postgres:16-alpine`
 
-**4. Personalise (15 min)**
+**4. Qoder (15 min)**
+- [ ] Open Qoder, make sure you're logged in.
+- [ ] Do the practice drill at the bottom of `QODER-GUIDE.md`.
+
+**5. Personalise (15 min)**
 - [ ] `DESIGN.md`: choose Direction 1 or 2 (or change the colours), delete the other.
 - [ ] Read `PROMPTS.md` once so you know what's there.
 
-**5. Get the files into the exam (5 min)**
-- [ ] Upload all the `.md` files (or the zip) to the Moodle file area the lecturer mentioned.
-- [ ] They're also on GitHub (`coms3011a-test-practice`). If github.com is reachable in the exam, you can `git clone` it as a backup.
+**6. Upload (5 min)**
+- [ ] Upload all the `.md` files (or the zip) to the Moodle file area the lecturer mentioned, so you can download them in the exam.
+- [ ] Also email them to yourself as a backup.
 
-**6. Pack your bag:** phone + charger, earphones, water, snacks, Wits card. Alarm for early arrival. Aim to be at MSL by about 07:30.
+**7. Pack your bag:** laptop charger, phone charger, USB-C hub, earphones, water, snacks. Alarm for early arrival — aim to be at MSL by about 07:30.
 
 ---
 
@@ -83,13 +77,8 @@ fnm install 18.19.1 && fnm use 18.19.1 && node -v     # v18.19.1 in this termina
 6. Check the allowed-domains list. Decide: Stack A (default) or Stack B.
 7. Use **PROMPTS.md → Prompt 0** in Qoder's **Ask mode** to sanity-check your plan (asking questions isn't coding).
 
-### Before 08:00 (when you sit down)
-- Log in. Open a terminal and run the checks in `STACK-A-NEXTJS.md` → "step 0" (`node -v`, etc.).
-- Download the pack from Moodle. Sign in to Qoder.
-- Set your git name/email and credential cache (`COMMITS.md` → step 0).
-
 ### 08:30–09:30 — Setup + core
-- Create the project (`STACK-A-NEXTJS.md` → "Exam: setup", **with the pinned versions**), copy in `AGENTS.md`, `COMMITS.md`, `DESIGN.md`, `BRIEF.md`.
+- Create the project (stack file), copy in `AGENTS.md`, `COMMITS.md`, `DESIGN.md`, `BRIEF.md`.
 - First commit + push **before** writing any feature. (`COMMITS.md`)
 - Build the core features one at a time with **Prompt 2**. Commit after each.
 
@@ -112,7 +101,6 @@ Eat away from the screen. Before you leave: push. When you come back: walk throu
 - **Prompt 10 (final checklist).** README with how to run it.
 - 16:30: final full walkthrough, tests, push. Check on github.com that the latest commit is actually there.
 - 16:45: done. Nothing in flight.
-- Before you leave the PC: `git credential-cache exit` (logs your token out), and sign out of Qoder.
 
 ---
 
@@ -124,4 +112,4 @@ Switch to **Stack B** only if, in the first 30–40 minutes of coding:
 
 **Never switch stacks after 10:00.** At that point fix forward.
 
-The database has its own fallbacks *inside* Stack A (better-sqlite3 → sql.js → JSON files), so a database install problem alone is **not** a reason to switch stacks. Stack B also may not work on the lab PCs if Python has no `venv`/`pip`. Check with the 1-minute test at the top of `STACK-B-PYTHON.md`.
+The database has its own fallback *inside* Stack A (better-sqlite3 → built-in `node:sqlite`), so a database install problem alone is **not** a reason to switch stacks.

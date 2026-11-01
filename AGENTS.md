@@ -12,15 +12,7 @@
 - Never install a new library without asking. Use what is already installed. Never add a second library that does the same job as an existing one.
 - Keep the app runnable at all times. Never leave half-finished features wired into the UI.
 
-## 1. Environment and stack (ACTIVE: Stack A)
-- **Machine:** Ubuntu lab PC, **Node 18.19.1**, behind a firewall. Every package must support Node 18.
-- **Pinned versions. Do NOT upgrade them.** Never run `npm update`, `npm audit fix --force`, or install `@latest`:
-  - `next` 15.5.27, `react`/`react-dom` 19.1.0
-  - `tailwindcss` + `@tailwindcss/postcss` **4.1.18 exact** (4.2+ breaks on Node 18)
-  - `better-sqlite3` **11.10.0 exact** (v12 needs Node 20) — or `sql.js` 1.15.2 if better-sqlite3 can't install
-  - `vitest` **3.2.4 exact** (v4 needs Node 20), `tsx`
-  - Before adding any new package, check that its `engines` field allows Node 18. Install with `-E` (exact version).
-- **Node 18 has no** global `File`, no `node:sqlite`, no `Array.prototype.toSorted`, no `Object.groupBy`. Don't use them. For uploads, duck-type the form entry instead of `instanceof File`.
+## 1. Stack (ACTIVE: Stack A)
 - **Framework:** Next.js (App Router) + TypeScript (strict) + Tailwind CSS
 - **Database:** SQLite, accessed ONLY through `src/lib/db.ts`. Raw SQL with prepared statements and `?` placeholders. No ORM.
 - **Tests:** Vitest. Tests run against an in-memory database (`DB_PATH=:memory:`), never against `data/app.db`.
